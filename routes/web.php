@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AkunPenggunaController;
+use App\Http\Controllers\Admin\SemesterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -35,6 +36,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/pengguna/edit/{user}', [AkunPenggunaController::class, 'edit'])->name('akun.pengguna.edit');
     Route::put('/dashboard/pengguna/update/{user}', [AkunPenggunaController::class, 'update'])->name('akun.pengguna.update');
     Route::delete('/dashboard/pengguna/delete/{user}', [AkunPenggunaController::class, 'destroy'])->name('akun.pengguna.delete');
+
+    //Semester
+    Route::get('/dashboard/semester', [SemesterController::class, 'index'])->name('semester');
+    Route::get('/dashboard/semester/create', [SemesterController::class, 'create'])->name('semester.create');
+    Route::post('/dashboard/semester/create', [SemesterController::class, 'store'])->name('semester.store');
+    Route::get('/dashboard/semester/edit/{semester}', [SemesterController::class, 'edit'])->name('semester.edit');
+    Route::put('/dashboard/semester/update/{semester}', [SemesterController::class, 'update'])->name('semester.update');
+    Route::delete('/dashboard/semester/delete/{semester}', [SemesterController::class, 'destroy'])->name('semester.delete');
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
