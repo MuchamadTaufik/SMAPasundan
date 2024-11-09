@@ -1,0 +1,53 @@
+.sidebar-brand-icon .logo {
+    width: 50px;
+    height: auto;
+}
+.sidebar-brand {
+    background-color: rgb(66, 66, 66);
+}
+
+.navbar-nav {
+    background-color: rgb(29, 29, 29);
+}
+
+.icon-logout {
+    background-color: rgb(66, 66, 66);
+}
+
+.identitas {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Membuat elemen ul menggunakan flexbox */
+    align-items: center; /* Agar elemen berjajar secara vertikal di tengah */
+}
+
+/* Mengatur elemen li agar berjajar */
+.identitas-item {
+    color: black;
+    margin-right: 30px; /* Jarak antar elemen */
+    padding: 5px 10px; /* Jarak dalam border */
+    border: 2px solid #000000; /* Border pada setiap li */
+    border-radius: 10px; /* Sudut border membulat */
+}
+
+/* Mengatur margin untuk h6 di dalam li */
+.identitas-item h6 {
+    margin: 0;
+}
+
+/* Gaya mobile */
+@media (max-width: 768px) {
+    .identitas {
+        display: none; /* Vertical layout */
+    }
+}
+
+.text-center img {
+    height: auto;
+    width: 130px;
+}
+
+.page-item.active .page-link {
+    background-image: linear-gradient(to right, #333, #414141);
+}

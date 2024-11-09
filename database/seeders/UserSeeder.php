@@ -33,6 +33,12 @@ class UserSeeder extends Seeder
                   'email' => 'admin@gmail.com',
                   'password' => '123456',
                ],
+               [   
+                  'name' => 'Siswa',
+                  'role' => 'siswa',
+                  'email' => 'siswa@gmail.com',
+                  'password' => '123456',
+               ],
          ];
          
          foreach ($data as $value) {
