@@ -35,7 +35,7 @@
    <div id="wrapper">
       
       <!-- sidebar -->
-      @include('dashboard-guru.layouts.partials.sidebar')
+      @include('layouts.partials.sidebar')
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
@@ -44,7 +44,7 @@
          <div id="content">
 
                <!-- topbar -->
-               @include('dashboard-guru.layouts.partials.topbar')
+               @include('layouts.partials.topbar')
 
                <!-- Begin Page Content -->
                <div class="container-fluid">
@@ -54,7 +54,7 @@
 
          </div>
             <!-- End of Main Content -->
-            @include('dashboard-guru.layouts.partials.footer')
+            @include('layouts.partials.footer')
       </div>
       <!-- End of Content Wrapper -->
 

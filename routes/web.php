@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AkunPenggunaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -20,18 +21,26 @@ Route::post('/login',[LoginController::class, 'authenticate'])->middleware('gues
 
 Route::post('/logout',[LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+Route::group(['middleware' => ['auth', 'role:admin,guru,siswa']], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
+});
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard-admin', [DashboardController::class, 'indexAdmin'])->name('dashboard-admin');
+    //Akun Pengguna
+    Route::get('/dashboard/pengguna', [AkunPenggunaController::class, 'index'])->name('akun.pengguna');
+    Route::get('/dashboard/pengguna/create', [AkunPenggunaController::class, 'create'])->name('akun.pengguna.create');
+    Route::post('/dashboard/pengguna/store', [AkunPenggunaController::class, 'store'])->name('akun.pengguna.store');
+    Route::get('/dashboard/pengguna/edit/{user}', [AkunPenggunaController::class, 'edit'])->name('akun.pengguna.edit');
+    Route::put('/dashboard/pengguna/update/{user}', [AkunPenggunaController::class, 'update'])->name('akun.pengguna.update');
+    Route::delete('/dashboard/pengguna/delete/{user}', [AkunPenggunaController::class, 'destroy'])->name('akun.pengguna.delete');
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
-    //Dashboard
-    Route::get('/dashboard-guru', [DashboardController::class, 'indexGuru'])->name('dashboard-guru');
     
-    //Profile-Guru
-    Route::get('/dashboard-guru/profile', [DashboardController::class, 'profileGuru'])->name('profile.guru');
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
-    Route::get('/', [DashboardController::class, 'indexSiswa'])->name('dashboard-siswa');
+    
 });

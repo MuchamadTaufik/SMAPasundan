@@ -1,4 +1,4 @@
-@extends('dashboard-guru.layouts.main')
+@extends('layouts.main')
 
 @section('container')
 

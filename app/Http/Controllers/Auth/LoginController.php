@@ -29,17 +29,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            // Cek role pengguna
-            if ($user->role === 'admin') {
-                toast()->success('Hallo', 'Selamat Datang ' . $user->name);
-                return redirect()->intended('dashboard-admin')->withInput();
-            } elseif ($user->role === 'guru') {
-                toast()->success('Hallo', 'Selamat Datang ' . $user->name);
-                return redirect()->intended('dashboard-guru')->withInput();
-            } elseif ($user->role === 'siswa') {
-                toast()->success('Hallo', 'Selamat Datang ' . $user->name);
-                return redirect()->intended('dashboard-siswa')->withInput();
-            }
+            toast()->success('Hallo', 'Selamat Datang ' . $user->name);
+            return redirect()->intended('/')->withInput();
         }
 
         // Jika autentikasi gagal

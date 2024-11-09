@@ -1,4 +1,4 @@
-@extends('dashboard-guru.layouts.main')
+@extends('layouts.main')
 
 @section('container')
    <div class="card card-body mx-3 mx-md-4 mt-n6">
