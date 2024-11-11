@@ -81,8 +81,13 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/dashboard/bimbingan/{biodata}', [BimbinganController::class, 'create'])->name('bimbingan.create');
     Route::post('/dashboard/bimbingan/create', [BimbinganController::class, 'store'])->name('bimbingan.store');
     Route::get('/dashboard/bimbingan/rekap/{biodata}', [BimbinganController::class, 'rekap'])->name('bimbingan.rekap');
+    Route::get('/dashboard/bimbingan/edit/{kegiatan}', [BimbinganController::class, 'edit'])->name('bimbingan.edit');
+    Route::put('/dashboard/bimbingan/update/{kegiatan}', [BimbinganController::class, 'update'])->name('bimbingan.update');
+    Route::delete('/dashboard/bimbingan/delete/{kegiatan}', [BimbinganController::class, 'destroy'])->name('bimbingan.delete');
 
+    Route::get('/dashboard/bimbingan/surat/{kegiatan}', [BimbinganController::class, 'downloadBimbingan'])->name('bimbingan.download');
     Route::get('/dashboard/bimbingan/laporan/{biodata_id}/{jenis_kegiatans_id}', [BimbinganController::class, 'downloadRekap'])->name('bimbingan.laporan');
+    Route::get('/dashboard/bimbingan/rekapitulasi/{jenis_kegiatans_id}', [BimbinganController::class, 'downloadRekapBimbingan'])->name('bimbingan.rekapitulasi');
 
 });
 

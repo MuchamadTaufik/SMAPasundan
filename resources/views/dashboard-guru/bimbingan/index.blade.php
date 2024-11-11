@@ -6,7 +6,7 @@
          <h6 class="m-0 font-weight-bold text-dark">Bimbingan Siswa</h6>
       </div>
       <div class="card-body">
-         <a href="" class="btn btn-primary float-right mb-4">Download Laporan</a>
+         <a href="{{ route('bimbingan.rekapitulasi', ['jenis_kegiatans_id' => 1]) }}" class="btn btn-primary float-right mb-4">Download Laporan</a>
          <div class="table-responsive">
             <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                   <thead>

@@ -36,11 +36,16 @@
                                  <td>{{ $data->topik }}</td>
                                  <td>{{ $data->tujuan }}</td>
                                  <td>{{ $data->pemateri }}</td>
-                                 <td>{{ $data->tempat_select }} ({{ $data->tempat }})</td>
+                                 @if ($data->tempat_select == 'online')
+                                    <td>{{ $data->tempat_select }} <a href="{{ $data->tempat }}">({{ $data->tempat }})</a></td>
+                                 @else
+                                    <td>{{ $data->tempat_select }} ({{ $data->tempat }})</td>
+                                 @endif
+                                 
                                  <td>
-                                    <a href="" class="badge bg-success border-0">Download Surat</a>
-                                    <a href="" class="badge bg-warning border-0"><i class="bi bi-pencil-square"></i></a>
-                                    <form action="" method="post" class="d-inline">
+                                    <a href="{{ route('bimbingan.download', $data->id) }}" class="badge bg-success border-0">Download Surat</a>
+                                    <a href="{{ route('bimbingan.edit', $data->id) }}" class="badge bg-warning border-0"><i class="bi bi-pencil-square"></i></a>
+                                    <form action="{{ route('bimbingan.delete', $data->id) }}" method="post" class="d-inline">
                                           @method('delete')
                                           @csrf
                                           <button type="submit" class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash3-fill"></i></button>
