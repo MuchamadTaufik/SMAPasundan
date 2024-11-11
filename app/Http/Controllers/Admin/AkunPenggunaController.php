@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Biodata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,18 +41,40 @@ class AkunPenggunaController extends Controller
             'password' => 'required|min:6|max:255',
         ]);
 
+        DB::beginTransaction();
         try {
+            // Hash password
             $validateData['password'] = Hash::make($validateData['password']);
 
-            User::create($validateData);
+            // Buat user terlebih dahulu
+            $user = User::create([
+                'name' => $validateData['name'],
+                'email' => $validateData['email'],
+                'role' => $validateData['role'],
+                'password' => $validateData['password']
+            ]);
 
-            toast()->success('Berhasil', 'Akun berhasil di daftarkan');
-            return redirect('/dashboard/pengguna')->withInput();
+            // Membuat biodata kosong yang terhubung dengan user
+            Biodata::create([
+                'user_id' => $user->id,
+                'semester_id' => null,
+                'kelas_id' => null,
+                'nomor_induk' => null,
+                'alamat' => null,
+                'nomor_hp' => null
+            ]);
+
+            DB::commit();
+            toast()->success('Berhasil', 'Akun berhasil didaftarkan');
+            return redirect('/dashboard/pengguna');
+
         } catch (\Exception $e) {
-            toast()->error('Register Gagal', 'Email Telah digunakan.');
+            DB::rollBack();            
+            toast()->error('Register Gagal', 'Terjadi kesalahan saat mendaftarkan akun.');
             return back()->withInput();
         }
     }
+
 
     /**
      * Show the form for editing the specified resource.

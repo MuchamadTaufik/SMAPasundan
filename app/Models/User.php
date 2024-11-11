@@ -43,13 +43,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function semester()
+    public function biodata()
     {
-        return $this->belongsTo(Semester::class);
+        return $this->hasOne(Biodata::class);
     }
 
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
 }

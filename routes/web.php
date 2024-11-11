@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AkunPenggunaController;
+use App\Http\Controllers\Admin\BiodataController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\SemesterController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/dashboard/semester/update/{semester}', [SemesterController::class, 'update'])->name('semester.update');
     Route::delete('/dashboard/semester/delete/{semester}', [SemesterController::class, 'destroy'])->name('semester.delete');
 
+    Route::get('/dashboard/semester/generate',[SemesterController::class, 'generate'])->name('semester.generate');
+    Route::post('/dashboard/generate-semester', [SemesterController::class, 'storeSemester'])->name('generate.semester');
+
     //Kelas
     Route::get('/dashboard/kelas', [KelasController::class, 'index'])->name('kelas');
     Route::get('/dashboard/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
@@ -53,6 +57,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/kelas/edit/{kelas}', [KelasController::class, 'edit'])->name('kelas.edit');
     Route::put('/dashboard/kelas/update/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
     Route::delete('/dashboard/kelas/delete/{kelas}', [KelasController::class, 'destroy'])->name('kelas.delete');
+
+    Route::post('/dashboard/generate-kelas', [KelasController::class, 'storeKelas'])->name('generate.kelas');
+    Route::get('/dashboard/kelas/generate',[KelasController::class, 'generate'])->name('kelas.generate');
+
+
+
+    //Guru
+    Route::get('/dashboard/guruBk', [BiodataController::class, 'indexGuru'])->name('guru');
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {

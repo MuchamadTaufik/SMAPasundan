@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('semester_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('kelas_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->enum('role', ['guru','siswa','admin']);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('nomor_induk')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('nomor_hp')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('biodatas');
     }
 };

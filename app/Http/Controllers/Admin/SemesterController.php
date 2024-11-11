@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
+use App\Models\Biodata;
 use App\Models\Semester;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSemesterRequest;
 use App\Http\Requests\UpdateSemesterRequest;
@@ -39,14 +43,6 @@ class SemesterController extends Controller
 
         toast()->success('Berhasil', 'Semester berhasil ditambahkan');
         return redirect('/dashboard/semester')->withInput();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Semester $semester)
-    {
-        //
     }
 
     /**
@@ -88,4 +84,46 @@ class SemesterController extends Controller
         alert()->success('Success', 'Semester berhasil dihapus');
         return redirect('/dashboard/semester')->withInput();
     }
+
+    public function generate()
+    {   
+        $users = User::whereIn('role', ['guru','siswa'])->get();
+        $semester = Semester::all();
+        return view('dashboard-admin.semester.generate', compact('semester','users'));
+    }
+
+
+    public function storeSemester(Request $request)
+    {
+        $request->validate([
+            'semester_id' => 'required|exists:semesters,id',
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'exists:users,id',
+        ]);
+
+        $semesterId = $request->input('semester_id');
+        $userIds = $request->input('user_ids');
+
+        
+        foreach ($userIds as $userId) {
+            $user = User::find($userId);
+            if ($user && $user->biodata) {
+                $user->biodata->update(['semester_id' => $semesterId]);
+            } else {
+                $biodata = Biodata::create([
+                    'user_id' => $userId,
+                    'semester_id' => $semesterId,
+                    'kelas_id' => null,
+                    'nomor_induk' => null,
+                    'alamat' => null,
+                    'nomor_hp' => null,
+                ]);
+            }
+        }
+
+        alert()->success('Success', 'Semester berhasil digenerate');
+        return redirect()->route('semester')->withInput();
+    }
+
+
 }

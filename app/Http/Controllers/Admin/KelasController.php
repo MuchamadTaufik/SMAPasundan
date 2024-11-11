@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Kelas;
+use App\Models\Biodata;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
@@ -87,5 +91,44 @@ class KelasController extends Controller
 
         alert()->success('Success', 'Kelas berhasil dihapus');
         return redirect('/dashboard/kelas')->withInput();
+    }
+
+    public function generate()
+    {   
+        $users = User::where('role', 'siswa')->get();
+        $kelas = Kelas::all();
+        return view('dashboard-admin.kelas.generate', compact('kelas','users'));
+    }
+
+    public function storeKelas(Request $request)
+    {
+        $request->validate([
+            'kelas_id' => 'required|exists:kelas,id',
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'exists:users,id',
+        ]);
+
+        $kelasId = $request->input('kelas_id');
+        $userIds = $request->input('user_ids');
+
+        
+        foreach ($userIds as $userId) {
+            $user = User::find($userId);
+            if ($user && $user->biodata) {
+                $user->biodata->update(['kelas_id' => $kelasId]);
+            } else {
+                $biodata = Biodata::create([
+                    'user_id' => $userId,
+                    'kelas_id' => $kelasId,
+                    'semester_id' => null,
+                    'nomor_induk' => null,
+                    'alamat' => null,
+                    'nomor_hp' => null,
+                ]);
+            }
+        }
+
+        alert()->success('Success', 'Kelas berhasil digenerate');
+        return redirect()->route('kelas')->withInput();
     }
 }

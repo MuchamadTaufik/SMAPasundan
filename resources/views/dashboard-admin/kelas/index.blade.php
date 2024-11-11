@@ -7,6 +7,7 @@
          <h6 class="m-0 font-weight-bold text-dark">Daftar Kelas</h6>
       </div>
       <div class="card-body">
+         <a href="{{ route('kelas.generate') }}" class="btn btn-dark float-left mb-4">Generate Kelas</a>
          <a href="{{ route('kelas.create') }}" class="btn btn-dark float-right mb-4">Tambah Kelas</a>
          <div class="table-responsive">
             <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">

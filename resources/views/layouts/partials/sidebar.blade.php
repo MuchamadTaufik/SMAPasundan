@@ -63,7 +63,7 @@
             <div id="collapseAccount" class="collapse" aria-labelledby="headingAccount"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">Guru BK</a>
+                    <a class="collapse-item" href="{{ route('guru') }}">Guru BK</a>
                     <a class="collapse-item" href="">Siswa</a>
                 </div>
             </div>

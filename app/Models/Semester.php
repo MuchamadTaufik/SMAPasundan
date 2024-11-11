@@ -11,8 +11,8 @@ class Semester extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function biodata()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Biodata::class);
     }
 }
