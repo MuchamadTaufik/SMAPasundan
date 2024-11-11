@@ -14,42 +14,35 @@ class BiodataController extends Controller
      * Display a listing of the resource.
      */
     public function indexGuru()
-    {   
-        $user = User::where('role', 'guru')->latest()->get();
-
-        return view('dashboard-admin.guru.index', compact('user'));
-    }
-    
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
-        //
+        // Dapatkan semua biodata yang berhubungan dengan pengguna yang memiliki peran 'guru'
+        $biodata = Biodata::whereHas('user', function($query) {
+            $query->where('role', 'guru');
+        })->latest()->get();
+
+        return view('dashboard-admin.guru.index', compact('biodata'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBiodataRequest $request)
+    public function indexSiswa()
     {
-        //
-    }
+        $biodata = Biodata::whereHas('user', function($query) {
+            $query->where('role','siswa');
+        })->latest()->get();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Biodata $biodata)
-    {
-        //
+        return view('dashboard-admin.siswa.index', compact('biodata'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Biodata $biodata)
+    public function editGuru(Biodata $biodata)
     {
-        //
+        return view('dashboard-admin.guru.edit', compact('biodata'));
+    }
+
+    public function editSiswa(Biodata $biodata)
+    {
+        return view('dashboard-admin.siswa.edit', compact('biodata'));
     }
 
     /**
@@ -57,14 +50,48 @@ class BiodataController extends Controller
      */
     public function update(UpdateBiodataRequest $request, Biodata $biodata)
     {
-        //
+        try {
+            $rules = [
+                'user_id' => 'nullable|exists:users,id',
+                'semester_id' => 'nullable|exists:semesters,id',
+                'kelas_id' => 'nullable|exists:kelas,id',
+                'nomor_induk' => 'nullable|max:255|unique:biodatas,nomor_induk,' . $biodata->id,
+                'alamat' => 'nullable|max:255',
+                'nomor_hp' => 'nullable|max:25'
+            ];
+
+            $validateData = $request->validate($rules);
+
+            $biodata->update($validateData);
+
+            alert()->success('Berhasil', 'Biodata Berhasil diubah');
+            return redirect('/')->withInput();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Biodata $biodata)
     {
-        //
+        try {
+            // Hapus user terkait dengan biodata ini
+            $user = $biodata->user;
+            if ($user) {
+                $user->delete();
+            }
+            
+            // Hapus biodata
+            $biodata->delete();
+
+            alert()->success('Success', 'Biodata dan Akun dihapus');
+            return redirect('/')->withInput();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
+
 }

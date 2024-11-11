@@ -11,16 +11,20 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $totalSiswa = User::where('role','siswa')->count();
         
+        $totalGuru = User::where('role','guru')->count();
+
+        $totalAdmin = User::where('role','admin')->count();
         return view('index', [
-            'user' => $user
+            'totalSiswa' => $totalSiswa,
+            'totalGuru' => $totalGuru,
+            'totalAdmin' => $totalAdmin
         ]);
     }
 
     public function profile()
-    {
-        $user = Auth::user();
-        return view('profile.index', compact('user'));
+    {   
+        return view('profile.index');
     }
 }

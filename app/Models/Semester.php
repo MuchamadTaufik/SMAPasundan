@@ -13,6 +13,6 @@ class Semester extends Model
 
     public function biodata()
     {
-        return $this->belongsTo(Biodata::class);
+        return $this->hasMany(Biodata::class);
     }
 }

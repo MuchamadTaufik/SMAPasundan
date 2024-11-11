@@ -18,6 +18,12 @@ class Biodata extends Model
 
     public function semester()
     {
-        return $this->hasMany(Semester::class);
+        return $this->belongsTo(Semester::class);
+    }
+
+    // Relasi ke model Kelas
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
     }
 }

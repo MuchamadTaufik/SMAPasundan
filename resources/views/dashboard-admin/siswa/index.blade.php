@@ -4,7 +4,7 @@
    <!-- DataTales Example -->
    <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-         <h6 class="m-0 font-weight-bold text-dark">Daftar Guru</h6>
+         <h6 class="m-0 font-weight-bold text-dark">Daftar Siswa</h6>
       </div>
       <div class="card-body">
          <div class="table-responsive">
@@ -15,6 +15,7 @@
                         <th>Nama</th>
                         <th>Nomor Induk</th>
                         <th>Semester</th>
+                        <th>Kelas</th>
                         <th>Alamat</th>
                         <th>No HP</th>
                         <th>Aksi</th>
@@ -28,10 +29,11 @@
                         <td>{{ $data->user->name }}</td>
                         <td>{{ $data->nomor_induk ?? '-'}}</td>
                         <td>{{ $data->semester->name ?? '-' }}</td>
+                        <td>{{ $data->kelas->name ?? '-' }}</td>
                         <td>{{ $data->alamat ?? '-' }}</td>
                         <td>{{ $data->nomor_hp ?? '-'}}</td>
                         <td>
-                              <a href="{{ route('guru.edit', $data->id) }}" class="badge bg-warning border-0"><i class="bi bi-pencil-square"></i></a>
+                              <a href="{{ route('siswa.edit', $data->id) }}" class="badge bg-warning border-0"><i class="bi bi-pencil-square"></i></a>
                               <form action="{{ route('guru.delete', $data->id) }}" method="post" class="d-inline">
                                  @method('delete')
                                  @csrf

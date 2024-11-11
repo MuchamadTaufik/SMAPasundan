@@ -61,10 +61,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/dashboard/generate-kelas', [KelasController::class, 'storeKelas'])->name('generate.kelas');
     Route::get('/dashboard/kelas/generate',[KelasController::class, 'generate'])->name('kelas.generate');
 
-
-
     //Guru
     Route::get('/dashboard/guruBk', [BiodataController::class, 'indexGuru'])->name('guru');
+    Route::get('/dashboard/guruBk/edit/{biodata}', [BiodataController::class, 'editGuru'])->name('guru.edit');
+
+    //Guru dan Siswa
+    Route::put('/dashboard/update/{biodata}', [BiodataController::class, 'update'])->name('guru.update');
+    Route::delete('/dashboard/delete/{biodata}', [BiodataController::class, 'destroy'])->name('guru.delete');
+
+    //Siswa
+    Route::get('/dashboard/siswa', [BiodataController::class, 'indexSiswa'])->name('siswa');
+    Route::get('/dashboard/siswa/edit/{biodata}', [BiodataController::class, 'editSiswa'])->name('siswa.edit');
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {

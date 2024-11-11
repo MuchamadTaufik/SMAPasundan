@@ -14,6 +14,10 @@
             <input class="form-control form-control-user" id="semester" type="text" name="semester" value="{{ old('semester', $biodata->semester->name ?? '') }}" readonly>
         </div>
         <div class="form-group">
+            <label for="semester">Kelas</label>
+            <input class="form-control form-control-user" id="kelas" type="text" name="kelas" value="{{ old('kelas', $biodata->kelas->name ?? '') }}" readonly>
+      </div>
+        <div class="form-group">
             <label for="nomor_induk">Nomor Induk</label>
             <input class="form-control form-control-user" id="nomor_induk" type="number" name="nomor_induk" value="{{ old('nomor_induk', $biodata->nomor_induk) }}" placeholder="Masukkan Nomor Induk">
         </div>
