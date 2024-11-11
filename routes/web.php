@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SemesterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Guru\BimbinganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +76,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
-    
+    //Bimbingan
+    Route::get('/dashboard/bimbingan', [BimbinganController::class, 'index'])->name('bimbingan');
+    Route::get('/dashboard/bimbingan/{biodata}', [BimbinganController::class, 'create'])->name('bimbingan.create');
+    Route::post('/dashboard/bimbingan/create', [BimbinganController::class, 'store'])->name('bimbingan.store');
+    Route::get('/dashboard/bimbingan/rekap/{biodata}', [BimbinganController::class, 'rekap'])->name('bimbingan.rekap');
+
+    Route::get('/dashboard/bimbingan/laporan/{biodata_id}/{jenis_kegiatans_id}', [BimbinganController::class, 'downloadRekap'])->name('bimbingan.laporan');
+
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {

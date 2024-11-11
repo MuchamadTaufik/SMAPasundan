@@ -37,7 +37,7 @@ class AkunPenggunaController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
-            'role' => 'required|in:guru,admin,siswa',
+            'role' => 'required',
             'password' => 'required|min:6|max:255',
         ]);
 
@@ -92,7 +92,7 @@ class AkunPenggunaController extends Controller
         try {
             $rules = [
                 'name' => 'required|max:255',
-                'role' => 'required|in:admin,siswa,guru',
+                'role' => 'required',
                 'email' => 'required|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|min:5|max:255'
             ];

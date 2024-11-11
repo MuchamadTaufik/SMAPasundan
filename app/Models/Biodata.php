@@ -26,4 +26,9 @@ class Biodata extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
+    }
 }

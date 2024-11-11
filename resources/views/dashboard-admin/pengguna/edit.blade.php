@@ -15,9 +15,9 @@
       <div class="form-group">
          <select class="form-select form-control-user" name="role" required style="width: 100%">
             <option value="" @if(old('role', $user->role) === null) selected @endif>-- Pilih Role --</option>
-            <option value="guru" @if(old('role', $user->role ) == 'guru') selected @endif>Guru</option>
-            <option value="admin" @if(old('role', $user->role) == 'admin') selected @endif>Admin</option>
-            <option value="siswa" @if(old('role', $user->role) == 'siswa') selected @endif>Siswa</option>
+            <option value="admin" @if(old('role', $user->role ) == 'admin') selected @endif>admin</option>
+            <option value="siswa" @if(old('role', $user->role) == 'siswa') selected @endif>siswa</option>
+            <option value="guru" @if(old('role', $user->role) == 'guru') selected @endif>guru</option>
          </select>
       </div>        
       <div class="form-group">
