@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jenis_kegiatans_id')->constrained()->onDelete('cascade');
             $table->foreignId('biodata_id')->constrained()->onDelete('cascade');
-            $table->date('tanggal');
-            $table->time('waktu');
+            $table->date('tanggal')->nullable();
+            $table->time('waktu')->nullable();
             $table->string('topik');
             $table->string('tujuan');
             $table->string('pemateri')->nullable();
-            $table->string('rencana_tindak_lanjut');
-            $table->string('tempat_select');
-            $table->string('tempat');
+            $table->string('rencana_tindak_lanjut')->nullable();
+            $table->string('tempat_select')->nullable();
+            $table->string('tempat')->nullable();
             $table->timestamps();
         });
     }

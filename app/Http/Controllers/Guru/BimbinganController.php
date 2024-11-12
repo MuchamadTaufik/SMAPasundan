@@ -47,7 +47,6 @@ class BimbinganController extends Controller
             'tempat' => 'required'
             
         ]);
-
         Kegiatan::create($validateData);
 
         toast()->success('Berhasil', 'Data Bimbingan Berhasil ditambahkan');

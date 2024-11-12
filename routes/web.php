@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Guru\BimbinganController;
+use App\Http\Controllers\Guru\KonsultasiController;
+use App\Http\Controllers\Siswa\AjuanKonsultasiController;
+use App\Http\Controllers\Siswa\PengajuanKonsultasiController;
+use App\Models\AjuanKonsultasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,8 +93,15 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/dashboard/bimbingan/laporan/{biodata_id}/{jenis_kegiatans_id}', [BimbinganController::class, 'downloadRekap'])->name('bimbingan.laporan');
     Route::get('/dashboard/bimbingan/rekapitulasi/{jenis_kegiatans_id}', [BimbinganController::class, 'downloadRekapBimbingan'])->name('bimbingan.rekapitulasi');
 
+    //Konsultasi
+    Route::get('/dashboard/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi');
+
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
-    
+    Route::get('/pengajuan-konsultasi', [AjuanKonsultasiController::class, 'index'])->name('pengajuan');
+    Route::post('/pengajuan-konsultasi/create', [AjuanKonsultasiController::class, 'store'])->name('pengajuan.store');
+
+    //Data
+    Route::get('/jadwal-konsultasi', [AjuanKonsultasiController::class, 'jadwal'])->name('data.konsultasi');
 });

@@ -30,8 +30,8 @@
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+        <li class="nav-item {{ Route::is('konsultasi*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="{{ route('konsultasi') }}">
                 <i class="bi bi-clipboard2-data-fill"></i>
                 <span>Konsultasi Siswa</span>
             </a>
@@ -83,6 +83,32 @@
                 </div>
             </div>
         </li>
+    @endcan
+    @can('isSiswa')
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ Route::is('pengajuan*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="{{ route('pengajuan') }}">
+                <i class="bi bi-file-arrow-down"></i>
+                <span>Pengajuan Konsultasi</span>
+            </a>
+        </li>
+
+        <li class="nav-item {{ Route::is('data*','bimbingan*', 'kunjungan*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="bi bi-clipboard-data-fill"></i>
+                <span>Data</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('data.konsultasi') }}">Jadwal Konsultasi</a>
+                    <a class="collapse-item" href="">Jadwal Bimbingan</a>
+                    <a class="collapse-item" href="">Jadwal Kunjungan</a>
+                </div>
+            </div>
+        </li>
+        
     @endcan
 
     <hr class="sidebar-divider d-none d-md-block">
