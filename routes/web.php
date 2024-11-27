@@ -95,6 +95,14 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 
     //Konsultasi
     Route::get('/dashboard/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi');
+    Route::get('/dashboard/konsultasi/jadwal/{kegiatan}', [KonsultasiController::class, 'penjadwalan'])->name('konsultasi.jadwal');
+    Route::put('/dashboard/konsultasi/jadwal/update/{kegiatan}', [KonsultasiController::class, 'update'])->name('konsultasi.update');
+    Route::get('/dashboard/konsultasi/rekap/{biodata}', [KonsultasiController::class, 'rekap'])->name('konsultasi.rekap');
+    Route::delete('/dashboard/konsultasi/delete/{kegiatan}', [KonsultasiController::class, 'destroy'])->name('konsultasi.delete');
+
+    Route::get('/dashboard/konsultasi/rekapitulasi/{jenis_kegiatans_id}', [KonsultasiController::class, 'downloadRekapKonsultasi'])->name('konsultasi.rekapitulasi');
+    Route::get('/dashboard/konsultasi/laporan/{biodata_id}/{jenis_kegiatans_id}', [KonsultasiController::class, 'downloadRekapKonsultasiSiswa'])->name('konsultasi.laporan');
+    Route::get('/dashboard/konsultasi/surat/{kegiatan}', [KonsultasiController::class, 'downloadKonsultasi'])->name('konsultasi.download');
 
 });
 

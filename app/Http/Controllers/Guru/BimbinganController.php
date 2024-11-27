@@ -55,8 +55,10 @@ class BimbinganController extends Controller
 
     public function rekap(Biodata $biodata)
     {
-        $kegiatan = $biodata->kegiatan;
-
+        $kegiatan = $biodata->kegiatan()
+        ->where('jenis_kegiatans_id', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('dashboard-guru.bimbingan.rekap.index', compact('kegiatan','biodata'));
     }
 

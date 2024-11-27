@@ -31,10 +31,20 @@ class AjuanKonsultasiController extends Controller
             'tujuan' => 'required|max:255'
         ]);
 
+        $existingKegiatan = Kegiatan::where('jenis_kegiatans_id', 2)
+            ->where('biodata_id', $validateData['biodata_id'])
+            ->whereNull('tanggal')
+            ->first();
+
+        if ($existingKegiatan) {
+            toast()->error('Gagal', 'Ajuan Konsultasi Gagal ditambahkan, Masih ada pengajuan yang belum dijadwalkan');
+            return redirect('/jadwal-konsultasi')->withInput();
+        }
+
         Kegiatan::create($validateData);
 
         toast()->success('Berhasil', 'Ajuan Konsultasi Berhasil ditambahkan, Cek Secara Berkala Informasi Penjadwalan');
-        return redirect('/')->withInput();
+        return redirect('/jadwal-konsultasi')->withInput();
     }
 
     public function jadwal()
@@ -43,10 +53,9 @@ class AjuanKonsultasiController extends Controller
         $biodataId = auth()->user()->biodata->id;
 
         // Mengambil semua kegiatan yang sesuai dengan biodata_id pengguna yang sedang login
-        $kegiatan = Kegiatan::where('biodata_id', $biodataId)->get();
+        $kegiatan = Kegiatan::where('jenis_kegiatans_id', 2)->where('biodata_id', $biodataId)->get();
 
         // Mengirim data kegiatan ke view
         return view('dashboard-siswa.data.konsultasi.index', compact('kegiatan'));
     }
-
 }

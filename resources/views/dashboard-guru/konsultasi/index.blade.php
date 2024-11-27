@@ -7,6 +7,7 @@
          <h6 class="m-0 font-weight-bold text-dark">Konsultasi Siswa</h6>
       </div>
       <div class="card-body">
+         <a href="{{ route('konsultasi.rekapitulasi', ['jenis_kegiatans_id' => 2]) }}" class="btn btn-primary float-right mb-4">Download Laporan</a>
          <div class="table-responsive">
             <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                   <thead>
@@ -33,12 +34,12 @@
                         <td>{{ $data->biodata->semester->name ?? '-'}}</td>
                         <td>{{ $data->topik }}</td>
                         <td>{{ $data->tujuan }}</td>
-                        @if ($data->pemateri)
-                           <td>Belum ada Konsultasi Baru</td>
+                        @if ($data->tanggal)
+                           <td><p class="btn btn-primary">Sudah dijadwalkan</p></td>
                         @else
-                           <td><a href="" class="btn btn-success" style="text-decoration: none;">Jadwalkan</a></td>
+                           <td><a href="{{ route('konsultasi.jadwal', $data->id) }}" class="btn btn-success" style="text-decoration: none;">Jadwalkan</a></td>
                         @endif
-                        <td><a href="" class="btn btn-primary" style="text-decoration: none;">Rekap Konsultasi</a></td>
+                        <td><a href="{{ route('konsultasi.rekap', ['biodata' => $data->biodata->id]) }}" class="btn btn-primary" style="text-decoration: none;">Rekap Konsultasi</a></td>
                      </tr>
                      @endforeach
                   </tbody>

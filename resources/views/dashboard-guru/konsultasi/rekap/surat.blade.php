@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Bimbingan Seluruh Siswa</title>
+    <title>Laporan Konsultasi Siswa</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -122,48 +122,44 @@
 <body>
     <div class="report-container">
         <div class="report-header">
-            <h1>Laporan Kegiatan Bimbingan Seluruh Siswa</h1>
+            <h1>Laporan Kegiatan Konsultasi Siswa</h1>
         </div>
 
         <table class="data-table">
-            <thead>
+         <thead>
+            <tr>
+                  <th>No</th>
+                  <th>Nama Siswa</th>
+                  <th>Kelas</th>
+                  <th>Semester</th>
+                  <th>Tanggal</th>
+                  <th>Waktu</th>
+                  <th>Topik</th>
+                  <th>Tujuan</th>
+                  <th>Tempat Select</th>
+                  <th>Tempat</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach($kegiatan as $item)
                   <tr>
-                     <th>No</th>
-                     <th>Nama Siswa</th>
-                     <th>Kelas</th>
-                     <th>Semester</th>
-                     <th>Tanggal</th>
-                     <th>Waktu</th>
-                     <th>Topik</th>
-                     <th>Tujuan</th>
-                     <th>Pemateri</th>
-                     <th>Rencana Tindak Lanjut</th>
-                     <th>Tempat Select</th>
-                     <th>Tempat</th>
+                     <td>{{ $loop->iteration}}</td>
+                     <td>{{ $item->biodata->user->name ?? '-'}}</td>
+                     <td>{{ $item->biodata->kelas->name ?? '-'}}</td>
+                     <td>{{ $item->biodata->semester->name ?? '-' }}</td>
+                     <td>{{ $item->tanggal }}</td>
+                     <td>{{ $item->waktu }}</td>
+                     <td>{{ $item->topik }}</td>
+                     <td>{{ $item->tujuan }}</td>
+                     <td>{{ $item->tempat_select }}</td>
+                     <td>{{ $item->tempat }}</td>
                   </tr>
-            </thead>
-            <tbody>
-                  @foreach($kegiatan as $item)
-                     <tr>
-                        <td>{{ $loop->iteration}}</td>
-                        <td>{{ $item->biodata->user->name }}</td>
-                        <td>{{ $item->biodata->kelas->name ?? '-'}}</td>
-                        <td>{{ $item->biodata->semester->name ?? '-' }}</td>
-                        <td>{{ $item->tanggal }}</td>
-                        <td>{{ $item->waktu }}</td>
-                        <td>{{ $item->topik }}</td>
-                        <td>{{ $item->tujuan }}</td>
-                        <td>{{ $item->pemateri }}</td>
-                        <td>{{ $item->rencana_tindak_lanjut ?? '-'}}</td>
-                        <td>{{ $item->tempat_select }}</td>
-                        <td>{{ $item->tempat }}</td>
-                     </tr>
-                  @endforeach
-            </tbody>
+            @endforeach
+         </tbody>
       </table>
 
         <div class="report-footer">
-            <p>Dicetak pada: {{ date('d M Y') }} | Laporan Resmi Bimbingan</p>
+            <p>Dicetak pada: {{ date('d M Y') }} | Laporan Resmi Rekapan Konsultasi</p>
         </div>
     </div>
 </body>
