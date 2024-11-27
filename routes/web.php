@@ -9,9 +9,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Guru\BimbinganController;
 use App\Http\Controllers\Guru\KonsultasiController;
+use App\Http\Controllers\Guru\KunjunganController;
 use App\Http\Controllers\Siswa\AjuanKonsultasiController;
-use App\Http\Controllers\Siswa\PengajuanKonsultasiController;
-use App\Models\AjuanKonsultasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +103,17 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
     Route::get('/dashboard/konsultasi/laporan/{biodata_id}/{jenis_kegiatans_id}', [KonsultasiController::class, 'downloadRekapKonsultasiSiswa'])->name('konsultasi.laporan');
     Route::get('/dashboard/konsultasi/surat/{kegiatan}', [KonsultasiController::class, 'downloadKonsultasi'])->name('konsultasi.download');
 
+    Route::get('/dashboard/kunjungan', [KunjunganController::class, 'index'])->name('kunjungan');
+    Route::get('/dashboard/kunjungan/create/{biodata}', [KunjunganController::class, 'create'])->name('kunjungan.create');
+    Route::post('/dashboard/kunjungan/store', [KunjunganController::class, 'store'])->name('kunjungan.store');
+    Route::get('/dashboard/kunjungan/rekap/{biodata}', [KunjunganController::class, 'rekap'])->name('kunjungan.rekap');
+    Route::get('/dashboard/kunjungan/edit/{kunjungan}', [KunjunganController::class, 'edit'])->name('kunjungan.edit');
+    Route::put('/dashboard/kunjungan/update/{kunjungan}', [KunjunganController::class, 'update'])->name('kunjungan.update');
+    Route::delete('/dashboard/kunjungan/delete/{kunjungan}', [KunjunganController::class, 'destroy'])->name('kunjungan.delete');
+
+    Route::get('/dashboard/kunjungan/rekapitulasi', [KunjunganController::class, 'downloadRekapKunjungan'])->name('kunjungan.rekapitulasi');
+    Route::get('/dashboard/kunjungan/laporan/{biodata_id}', [KunjunganController::class, 'downloadRekapKunjunganSiswa'])->name('kunjungan.laporan');
+    Route::get('/dashboard/kunjungan/surat/{kunjungan}', [KunjunganController::class, 'downloadKunjungan'])->name('kunjungan.download');
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {

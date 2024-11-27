@@ -38,8 +38,8 @@
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+        <li class="nav-item {{ Route::is('kunjungan*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="{{ route('kunjungan') }}">
                 <i class="bi bi-person-workspace"></i>
                 <span>Kunjungan</span>
             </a>

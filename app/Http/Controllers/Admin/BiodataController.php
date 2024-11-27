@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Biodata;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
-use App\Models\User;
 
 class BiodataController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Biodata;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
