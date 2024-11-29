@@ -37,7 +37,8 @@
                      <div class="mb-3 col-md-6">
                         <label class="form-label">Nomor HP</label>
                         <p class="border border-2 p-2">{{ auth()->user()->biodata->nomor_hp ?? '-'}}</p>
-                     </div><div class="mb-3 col-md-12">
+                     </div>
+                     <div class="mb-3 col-md-6">
                         <label class="form-label">Alamat</label>
                         <p class="border border-2 p-2">{{ auth()->user()->biodata->alamat ?? '-'}}</p>
                      </div>

@@ -147,4 +147,13 @@ class KunjunganController extends Controller
         alert()->success('Success', 'Data Kunjungan Berhasil dihapus');
         return redirect()->back()->withInput();
     }
+
+    public function indexSiswa()
+    {
+        $biodataId = auth()->user()->biodata->id;
+
+        $kunjungan = Kunjungan::where('biodata_id', $biodataId)->get();
+
+        return view('dashboard-siswa.data.kunjungan.index', compact('kunjungan'));
+    }
 }

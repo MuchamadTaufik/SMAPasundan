@@ -93,7 +93,7 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Route::is('data*','bimbingan*', 'kunjungan*') ? 'active' : '' }}">
+        <li class="nav-item {{ Route::is('data*') ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="bi bi-clipboard-data-fill"></i>
@@ -103,8 +103,8 @@
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('data.konsultasi') }}">Jadwal Konsultasi</a>
-                    <a class="collapse-item" href="">Jadwal Bimbingan</a>
-                    <a class="collapse-item" href="">Jadwal Kunjungan</a>
+                    <a class="collapse-item" href="{{ route('data.bimbingan') }}">Jadwal Bimbingan</a>
+                    <a class="collapse-item" href="{{ route('data.kunjungan') }}">Jadwal Kunjungan</a>
                 </div>
             </div>
         </li>

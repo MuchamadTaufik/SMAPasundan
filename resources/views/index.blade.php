@@ -48,7 +48,7 @@
                   <div class="row no-gutters align-items-center">
                      <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                           Total Akun</div>
+                           Total Akun Admin</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"> {{ $totalAdmin }} Admin</div>
                      </div>
                      <div class="col-auto">
@@ -70,7 +70,7 @@
                      <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                            Total Bimbingan Siswa</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Bimbingan Siswa</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalBimbingan }} Bimbingan Siswa</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -86,7 +86,7 @@
                      <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                            Total Konsultasi Siswa</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Konsultasi Siswa</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalKonsultasi }} Konsultasi Siswa</div>
                      </div>
                      <div class="col-auto">
                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -102,7 +102,7 @@
                      <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                            Total Kunjungan Siswa</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Kunjungan Siswa</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalKunjungan }} Kunjungan Siswa</div>
                      </div>
                      <div class="col-auto">
                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -123,7 +123,7 @@
                   </div>
                   <!-- Card Body -->
                   <div class="card-body pt-4 pb-2">
-                        
+                     {!! $penggunaChart->container() !!}
                   </div>
                </div>
             </div>
@@ -137,12 +137,21 @@
                   </div>
                   <!-- Card Body -->
                   <div class="card-body pt-4 pb-2">
-                        
+                     {!! $kegiatanChart->container() !!}
                   </div>
                </div>
             </div>
             
       </div>
    @endcan
+
+   <script src="{{ $penggunaChart->cdn() }}"></script>
+   
+   {{ $penggunaChart->script() }}
+
+   {{ $kegiatanChart->script() }}
+   <script src="{{ $kegiatanChart->cdn() }}"></script>
+
+   
 
 @endsection

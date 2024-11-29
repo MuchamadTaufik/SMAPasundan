@@ -142,4 +142,13 @@ class BimbinganController extends Controller
         alert()->success('Success', 'Data Bimbingan Berhasil dihapus');
         return redirect()->back()->withInput();
     }
+
+    public function indexSiswa()
+    {
+        $biodataId = auth()->user()->biodata->id;
+
+        $kegiatan = Kegiatan::where('jenis_kegiatans_id', 1)->where('biodata_id', $biodataId)->get();
+
+        return view('dashboard-siswa.data.bimbingan.index', compact('kegiatan'));
+    }
 }
